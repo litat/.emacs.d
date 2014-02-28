@@ -215,6 +215,8 @@ so let's not get too insert-happy."
          (if (looking-back ".")
                (insert ".")
            (insert " . ")))
+	((memq major-mode '(lisp-mode lisp-interaction-mode))
+	 (insert " . "))
         (t
          (smart-operator-insert "." 'after)
          (insert " "))))

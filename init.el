@@ -27,3 +27,5 @@
 ;; ESS Emacs Speaks Statistics
 (add-to-list 'load-path "~/.emacs.d/ess/lisp")
 (load "ess-site")
+(setq ess-eval-visibly nil)
+(setq ess-ask-for-ess-directory nil)
