@@ -1,9 +1,11 @@
 ;; display
-(if window-system
-    (progn (set-frame-height (selected-frame) 42)
-	   (toggle-scroll-bar -1)
-	   (tool-bar-mode -1)
-	   (show-paren-mode 1)))
+(when window-system
+  (set-frame-size (selected-frame) 80 44)
+  (toggle-scroll-bar -1)
+  (tool-bar-mode -1)
+  (show-paren-mode 1)
+  (set-face-background 'default "#F0F0F0"))
+
 
 ;; font 中文
 (set-frame-font "Menlo-14" nil t)
