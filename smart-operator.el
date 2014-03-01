@@ -195,8 +195,7 @@ so let's not get too insert-happy."
   (interactive)
   (cond ((and smart-operator-double-space-docs
           (smart-operator-document-line?))
-         (smart-operator-insert "." 'after)
-         (insert " "))
+         (smart-operator-insert "." 'after))
         ((or (looking-back "[0-9]")
              (or (and c-buffer-is-cc-mode
                       (looking-back "[a-z]"))
@@ -215,11 +214,8 @@ so let's not get too insert-happy."
          (if (looking-back ".")
                (insert ".")
            (insert " . ")))
-	((memq major-mode '(lisp-mode lisp-interaction-mode))
-	 (insert " . "))
         (t
-         (smart-operator-insert "." 'after)
-         (insert " "))))
+         (smart-operator-insert "." 'after))))
 
 (defun smart-operator-& ()
   "See `smart-operator-insert'."
