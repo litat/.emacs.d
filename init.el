@@ -1,25 +1,25 @@
 ;; display
 (when window-system
-  (set-frame-size (selected-frame) 80 44)
   (toggle-scroll-bar -1)
   (tool-bar-mode -1)
   (show-paren-mode 1)
-  (setq mac-command-modifier 'control)
-  (set-face-background 'default "gray25")
-  (set-face-background 'fringe "gray25")
-  (set-face-foreground 'default "gray75")
-  (set-face-background 'region "gray50"))
 
-;; font 中文
-(set-frame-font "Menlo-14" nil t)
-(set-fontset-font t 'unicode '("STHeiti" . "unicode-bmp"))
+  ;; color
+  (set-face-background 'default "gray25")
+  (set-face-foreground 'default "gray75")
+  (set-face-background 'fringe "gray25")
+  (set-face-background 'region "gray50")
+
+  ;; font 中文
+  (set-frame-font "Menlo-14")
+  (set-fontset-font t 'unicode '("STHeiti" . "unicode-bmp"))
+
+  ;; Mac specific
+  (setq mac-command-modifier 'control))
 
 ;; set shell path
 (add-to-list 'load-path "~/.emacs.d")
 (load "path")
-
-;; smart operator
-(require 'smart-operator)
 
 ;; autopair
 (require 'autopair)
@@ -32,8 +32,12 @@
 (ac-config-default)
 (setq ac-use-quick-help nil)
 
+;; smart operator
+(autoload 'smart-operator-mode "smart-operator" nil t)
+
 ;; ESS Emacs Speaks Statistics
 (add-to-list 'load-path "~/.emacs.d/ess/lisp")
-(load "ess-site")
+(autoload 'R "ess-site" nil t)
+(autoload 'r-mode "ess-site" nil t)
 (setq ess-eval-visibly nil)
 (setq ess-ask-for-ess-directory nil)

@@ -1,4 +1,8 @@
-((("background-color" .
+((("ls" .
+   [1 0])
+  ("nil" .
+   [1 0 1])
+  ("background-color" .
    [0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0])
   ("F0F0F0" .
    [1 0 0 0 1 0])
@@ -35,4 +39,42 @@
   ("when" .
    [1 0 0 0])
   ("listp" .
-   [0 0 0 0 2])))
+   [0 0 0 0 2])
+  ("erase-buffer" .
+   [0 0 0 4 0 1 0 0 0 0 0 0])
+  ("progn" .
+   [0 0 0 1 0])
+  ("switch-to-buffer-other-window" .
+   [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1])
+  ("other-window" .
+   [0 0 0 0 0 1 0 0 0 0 0 1])
+  ("defun" .
+   [0 0 0 1 0])
+  ("name" .
+   [1 0 0 0])
+  ("read-from-minibuffer" .
+   [0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 1])
+  ("read-minibuffer" .
+   [0 0 0 0 0 0 0 0 0 0 0 0 0 0 1])
+  ("erase-buffer-by-name" .
+   [0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0])
+  ("getwd" .
+   [0 0 0 0 2])
+  ("autoload" .
+   [0 0 1 0 0 0 0 5])
+  ("set-exec-path-from-shell-PATH" .
+   [0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0])
+  ("smart-operator->" .
+   [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1])
+  ("smart-operator" .
+   [1 0 0 0 0 0 0 0 0 0 1 0 0 0])
+  ("autopair" .
+   [0 0 0 1 0 0 0 1])
+  ("auto-complete-config" .
+   [0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0])
+  ("set-face-foreground" .
+   [0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0])
+  ("region" .
+   [0 0 0 0 0 3])
+  ("set-face-background" .
+   [0 0 0 0 1 0 1 0 0 0 0 0 0 0 0 0 0 0 0])))
