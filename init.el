@@ -6,13 +6,15 @@
   (show-paren-mode 1)
   (set-face-background 'default "#F0F0F0"))
 
-
 ;; font 中文
 (set-frame-font "Menlo-14" nil t)
 (set-fontset-font t 'unicode '("STHeiti" . "unicode-bmp"))
 
-;; smart operator
+;; set shell path
 (add-to-list 'load-path "~/.emacs.d")
+(load "path")
+
+;; smart operator
 (require 'smart-operator)
 
 ;; autopair
