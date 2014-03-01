@@ -4,7 +4,10 @@
   (toggle-scroll-bar -1)
   (tool-bar-mode -1)
   (show-paren-mode 1)
-  (set-face-background 'default "#F0F0F0"))
+  (setq mac-command-modifier 'control)
+  (set-face-background 'default "gray75")
+  (set-face-background 'fringe "gray75")
+  (set-face-foreground 'default "gray25"))
 
 ;; font 中文
 (set-frame-font "Menlo-14" nil t)

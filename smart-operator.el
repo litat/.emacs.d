@@ -214,6 +214,8 @@ so let's not get too insert-happy."
          (if (looking-back ".")
                (insert ".")
            (insert " . ")))
+	((memq major-mode '(lisp-mode lisp-interaction-mode))
+	 (insert "."))
         (t
          (smart-operator-insert "." 'after))))
 
@@ -303,6 +305,8 @@ so let's not get too insert-happy."
   (interactive)
   (cond (c-buffer-is-cc-mode
          (smart-operator-insert "?"))
+	((memq major-mode '(r-mode inferior-ess-mode))
+	 (insert "?"))
         (t
          (smart-operator-insert "?" 'after))))
 
