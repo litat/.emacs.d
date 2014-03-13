@@ -182,6 +182,8 @@ so let's not get too insert-happy."
            (smart-operator-insert ":" 'middle)))
         ((memq major-mode '(haskell-mode))
          (smart-operator-insert ":"))
+	((memq major-mode '(inferior-ess-mode r-mode))
+	 (insert ":"))
         (t
          (smart-operator-insert ":" 'after))))
 
