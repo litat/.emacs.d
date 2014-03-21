@@ -1,6 +1,0 @@
-cd ~/Desktop/
-ls
-ls -al
-cat .localized 
-rm .localized 
-mv learn-emacs-lisp.el.txt learn-emacs-lisp.el
