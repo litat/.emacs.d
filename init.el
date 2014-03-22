@@ -3,12 +3,11 @@
   (toggle-scroll-bar -1)
   (tool-bar-mode -1)
   (show-paren-mode 1)
+  (menu-bar-mode -1)
+  (set-fringe-style 0)
 
   ;; color
-  (set-face-background 'default "gray60")
-  (set-face-background 'fringe "gray60")
-  (set-face-foreground 'default "black")
-  (set-face-background 'region "khaki")
+  (set-face-background 'default "gray")
 
   ;; font 中文
   (set-frame-font "Menlo-14")
