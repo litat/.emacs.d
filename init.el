@@ -5,6 +5,7 @@
   (show-paren-mode 1)
   (menu-bar-mode -1)
   (set-fringe-style 0)
+  (tooltip-mode -1)
 
   ;; color theme
   (add-to-list 'custom-theme-load-path "~/.emacs.d/solarized")
