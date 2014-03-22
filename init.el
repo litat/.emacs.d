@@ -6,8 +6,9 @@
   (menu-bar-mode -1)
   (set-fringe-style 0)
 
-  ;; color
-  (set-face-background 'default "gray")
+  ;; color theme
+  (add-to-list 'custom-theme-load-path "~/.emacs.d/solarized")
+  (load-theme 'solarized-light t)
 
   ;; font 中文
   (set-frame-font "Menlo-14")
