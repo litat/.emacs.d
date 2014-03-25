@@ -29,3 +29,4 @@
 (autoload 'r-mode "ess-site" nil t)
 (setq ess-eval-visibly nil)
 (setq ess-ask-for-ess-directory nil)
+(setq ess-history-file nil)
