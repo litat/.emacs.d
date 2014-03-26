@@ -14,7 +14,7 @@
 
   ;; color theme
   (add-to-list 'custom-theme-load-path "~/.emacs.d/solarized")
-  (load-theme 'solarized-light t)
+  (load-theme 'solarized-dark t)
 
   ;; font 中文
   (set-frame-font "Menlo-14")
@@ -27,6 +27,3 @@
 (add-to-list 'load-path "~/.emacs.d/ess/lisp")
 (autoload 'R "ess-site" nil t)
 (autoload 'r-mode "ess-site" nil t)
-(setq ess-eval-visibly nil)
-(setq ess-ask-for-ess-directory nil)
-(setq ess-history-file nil)

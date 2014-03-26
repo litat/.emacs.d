@@ -265,7 +265,7 @@ See also `ess-blink-delay'"
   :group 'ess
   :type 'number)
 
-(defcustom ess-ask-for-ess-directory t
+(defcustom ess-ask-for-ess-directory nil	;default t
   "Non-nil means request the process directory each time S is run."
   :group 'ess
   :type 'boolean)
@@ -346,7 +346,7 @@ If this is nil, the history file is relative to `ess-directory'."
   :group 'ess
   :type '(choice (const nil) directory))
 
-(defcustom ess-history-file t
+(defcustom ess-history-file nil		;default t
   "File to pick up history from.  nil means *no* history is read or written.
 t means something like \".Rhistory\".
 If this is a relative file name, it is relative to `ess-history-directory'.
@@ -1718,7 +1718,7 @@ Otherwise, they get their own temporary buffer."
 
 (defvaralias 'ess-eval-visibly-p 'ess-eval-visibly)
 
-(defcustom ess-eval-visibly t
+(defcustom ess-eval-visibly nil		;default t
   "Non-nil means ess-eval- commands display commands in the process buffer.
 If t, ESS waits after each line of the command for the process
 output. This results in a nice sequence of input and output but
