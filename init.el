@@ -7,6 +7,7 @@
   (tooltip-mode -1)
   (set-fringe-style 0)
   (set-frame-parameter nil 'internal-border-width 0)
+  (set-frame-parameter nil 'fullscreen 'fullboth)
 
   ;; editing mode
   (show-paren-mode 1)
