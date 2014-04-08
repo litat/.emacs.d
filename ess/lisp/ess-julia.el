@@ -341,7 +341,7 @@ objects from that MODULE."
                (loc (process-get proc 'last-objects-cache))
                (lev (process-get proc 'last-eval)))
            (prog1
-               (mapcan (lambda (mod)
+               (cl-mapcan (lambda (mod)
                          ;; we are caching all modules, and reinit Main every
                          ;; time user enters commands
                          (copy-sequence
