@@ -8,6 +8,7 @@
   (set-fringe-style 0)
   (set-frame-parameter nil 'internal-border-width 0)
   (set-frame-parameter nil 'fullscreen 'fullboth)
+  (setq mouse-wheel-scroll-amount '(1 ((shift) . 1)))
   
   ;; color theme
   (add-to-list 'custom-theme-load-path "~/.emacs.d/solarized")
