@@ -27,9 +27,7 @@
 
 ;; shell PATH
 (setenv "PATH"
-	(concat
-	 (getenv "PATH") ":"
-	 "/usr/local/bin/"))
+	(concat (getenv "PATH") ":" "/usr/local/bin/" ":" "/usr/texbin"))
 
 ;; ESS Emacs Speaks Statistics
 (add-to-list 'load-path "~/.emacs.d/ess/lisp")
