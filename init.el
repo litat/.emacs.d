@@ -1,7 +1,7 @@
 ;; display
 (when window-system
   ;; windows and frames
-  (toggle-scroll-bar -1)
+  (set-scroll-bar-mode nil)
   (tool-bar-mode -1)
   (menu-bar-mode -1)
   (tooltip-mode -1)
@@ -12,11 +12,14 @@
   
   ;; color theme
   (add-to-list 'custom-theme-load-path "~/.emacs.d/solarized")
-  (load-theme 'solarized-dark t))
+  (load-theme 'solarized-light t))
 
 ;; editing mode
 (show-paren-mode 1)
 (electric-pair-mode 1)
+
+;; ispell
+(setq-default ispell-program-name "/usr/local/bin/ispell")
 
 ;; font 中文
 (set-frame-font "Menlo-14")
