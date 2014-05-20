@@ -1,15 +1,17 @@
 ;; display
 (when window-system
   ;; windows and frames
-  (set-scroll-bar-mode nil)
-  (tool-bar-mode -1)
-  (menu-bar-mode -1)
-  (tooltip-mode -1)
-  (set-fringe-style 0)
-  (set-frame-parameter nil 'internal-border-width 0)
+  (modify-all-frames-parameters '((border-width . 0)
+				  (internal-border-width . 0)
+				  (vertical-scroll-bars . nil)
+				  (left-fringe . 0)
+				  (right-fringe . 0)
+				  (menu-bar-lines . 0)
+				  (tool-bar-lines . 0)))
   (set-frame-parameter nil 'fullscreen 'fullboth)
+  (tooltip-mode -1)
   (setq mouse-wheel-scroll-amount '(1 ((shift) . 1)))
-  
+
   ;; color theme
   (add-to-list 'custom-theme-load-path "~/.emacs.d/solarized")
   (load-theme 'solarized-light t))
@@ -21,8 +23,12 @@
 ;; ispell
 (setq-default ispell-program-name "/usr/local/bin/ispell")
 
+;; ediff
+(setq ediff-window-setup-function 'ediff-setup-windows-plain)
+(setq ediff-split-window-function 'split-window-horizontally)
+
 ;; font 中文
-(set-frame-font "Menlo-14")
+(set-face-attribute 'default nil :font "Menlo-14")
 (set-fontset-font t 'unicode '("STHeiti" . "unicode-bmp"))
 
 ;; Mac specific
