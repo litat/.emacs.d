@@ -16,6 +16,9 @@
   (add-to-list 'custom-theme-load-path "~/.emacs.d/solarized")
   (load-theme 'solarized-light t))
 
+;; do not use dialog box
+(setq use-dialog-box nil)
+
 ;; editing mode
 (show-paren-mode 1)
 (electric-pair-mode 1)
