@@ -23,6 +23,10 @@
 (show-paren-mode 1)
 (electric-pair-mode 1)
 
+;; other elisp files to load
+(add-to-list 'load-path "~/.emacs.d/elisp")
+(require 'css-syntax-color-hex)
+
 ;; ispell
 (setq-default ispell-program-name "/usr/local/bin/ispell")
 
