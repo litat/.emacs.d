@@ -11,6 +11,7 @@
   (set-frame-parameter nil 'fullscreen 'fullboth)
   (tooltip-mode -1)
   (setq mouse-wheel-scroll-amount '(1 ((shift) . 1)))
+  (setq ring-bell-function 'ignore)
 
   ;; color theme
   (add-to-list 'custom-theme-load-path "~/.emacs.d/solarized")

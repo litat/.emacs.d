@@ -497,14 +497,14 @@ might want to set this to nil.
   "Variable to store completion history.
 Used by `ess-completion-read' command.")
 
-(defvar ess-smart-operators t
+(defvar ess-smart-operators nil
   "List of smart operators to be used in ESS and IESS modes.
 Not to be set by users. It is redefined by mode specific
 settings, such as `ess-R-smart-operators'.
 ")
 (make-variable-buffer-local 'ess-smart-operators)
 
-(defvar ess-R-smart-operators t
+(defvar ess-R-smart-operators nil
   "If nil, don't use any of smart operators.
 If t, use all. If an axplicit list of operators, use only those
 operators.
