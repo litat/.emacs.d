@@ -10,8 +10,7 @@
 				  (tool-bar-lines . 0)))
   (set-frame-parameter nil 'fullscreen 'fullboth)
   (tooltip-mode -1)
-  (setq mouse-wheel-scroll-amount '(1 ((shift) . 1)))
-  (setq ring-bell-function 'ignore)
+  (mouse-wheel-mode -1)
 
   ;; color theme
   (add-to-list 'custom-theme-load-path "~/.emacs.d/solarized")
@@ -23,10 +22,6 @@
 ;; editing mode
 (show-paren-mode 1)
 (electric-pair-mode 1)
-
-;; other elisp files to load
-(add-to-list 'load-path "~/.emacs.d/elisp")
-(require 'css-syntax-color-hex)
 
 ;; ispell
 (setq-default ispell-program-name "/usr/local/bin/ispell")
@@ -52,3 +47,7 @@
 (autoload 'r-mode "ess-site" nil t)
 (autoload 'julia "ess-site" nil t)
 (autoload 'julia-mode "ess-site" nil t)
+
+;; other elisp files to load
+(add-to-list 'load-path "~/.emacs.d/elisp")
+(require 'css-syntax-color-hex)
