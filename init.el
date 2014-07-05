@@ -10,7 +10,6 @@
 				  (tool-bar-lines . 0)))
   (set-frame-parameter nil 'fullscreen 'fullboth)
   (tooltip-mode -1)
-  (mouse-wheel-mode -1)
 
   ;; color theme
   (add-to-list 'custom-theme-load-path "~/.emacs.d/solarized")
@@ -51,3 +50,4 @@
 ;; other elisp files to load
 (add-to-list 'load-path "~/.emacs.d/elisp")
 (require 'css-syntax-color-hex)
+(load "ring-bell-ignore")
