@@ -10,7 +10,5 @@
           'face (list :background (match-string-no-properties 0)))))))
   (font-lock-fontify-buffer))
 
-(provide 'css-syntax-color-hex)
-
 (add-hook 'css-mode-hook 'css-syntax-color-hex)
 (add-hook 'html-mode-hook 'css-syntax-color-hex)
