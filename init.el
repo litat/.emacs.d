@@ -5,19 +5,9 @@
 ;; display
 (modify-all-frames-parameters '((menu-bar-lines . 0)))
 
-;; editing mode
-(show-paren-mode 1)
-(electric-pair-mode 1)
-
-;; shell PATH
-(setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin/"))
-
 ;;
 ;; packages
 ;;
-
-;; ispell
-(setq-default ispell-program-name "/usr/local/bin/ispell")
 
 ;; ediff
 (setq ediff-split-window-function 'split-window-horizontally)
