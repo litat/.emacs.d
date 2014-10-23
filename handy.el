@@ -10,6 +10,13 @@
 (electric-pair-mode)
 (delete-trailing-whitespace)
 (narrow-to-defun)
+(just-one-space)
+(zap-to-char)
+(font-lock-mode)
+(ido-mode)
+(occur)
+(highlight-regexp)
+(check-parens)
 
 ;; Features that needs parameters.
 (ffap)

@@ -1,0 +1,7 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: forEach
+# key: fe
+# --
+$1.forEach(function(${2:value}, ${3:index}, ${4:null}) {
+		    $0
+};
