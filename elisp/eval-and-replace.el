@@ -7,5 +7,3 @@
              (current-buffer))
     (error (message "Invalid expression")
            (insert (current-kill 0)))))
-
-(define-key lisp-interaction-mode-map (kbd "C-x C-e") 'eval-and-replace)

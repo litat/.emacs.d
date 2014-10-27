@@ -26,7 +26,7 @@
 ;; installed packages:
 
 ;; ace-jump-mode
-(define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
+(global-set-key (kbd "C-c SPC") 'ace-jump-mode)
 
 ;; ess
 (autoload 'r-mode "ess-site" nil t)
@@ -37,7 +37,7 @@
 (setq ess-tab-complete-in-script t)
 
 ;; expand-region
-(global-set-key (kbd "C-@") 'er/expand-region)
+(global-set-key (kbd "M-@") 'er/expand-region)
 
 ;; idomenu
 (global-set-key (kbd "C-c i") 'idomenu)
@@ -48,9 +48,12 @@
 ;; js-comint
 (setq inferior-js-program-command "/usr/local/bin/node")
 (setenv "NODE_NO_READLINE" "1")
-(define-key js2-mode-map (kbd "C-c C-j") 'js-send-last-sexp-and-go)
-(define-key js2-mode-map (kbd "C-c C-r") 'js-send-region-and-go)
-(define-key js2-mode-map (kbd "C-c C-b") 'js-send-buffer-and-go)
+(eval-after-load 'js2-mode
+  '(define-key js2-mode-map (kbd "C-c C-j") 'js-send-last-sexp-and-go))
+(eval-after-load 'js2-mode
+  '(define-key js2-mode-map (kbd "C-c C-r") 'js-send-region-and-go))
+(eval-after-load 'js2-mode
+  '(define-key js2-mode-map (kbd "C-c C-b") 'js-send-buffer-and-go))
 
 ;; multiple-cursors
 (global-set-key (kbd "C-c l") 'mc/edit-lines)
@@ -69,7 +72,7 @@
 
 ;; yasnippet
 (add-hook 'js2-mode-hook 'yas-minor-mode)
-(add-hook 'yas-minor-mode-hook 'yas-reload-all)
+(eval-after-load 'yasnippet '(yas-reload-all))
 
 ;; zencoding-mode
 (add-hook 'sgml-mode-hook 'zencoding-mode)
@@ -78,5 +81,5 @@
 ;; other elisp files to load
 (add-to-list 'load-path "~/.emacs.d/elisp")
 (autoload 'css-syntax-color-hex "css-syntax-color-hex" nil t)
-; (autoload 'eval-and-replace "eval-and-replace" nil t)
-; (define-key lisp-interaction-mode-map (kbd "C-x C-e") 'eval-and-replace)
+(autoload 'eval-and-replace "eval-and-replace" nil t)
+(global-set-key (kbd "C-c C-e") 'eval-and-replace)
