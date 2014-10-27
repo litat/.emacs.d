@@ -4,13 +4,22 @@
 (setq mc/cmds-to-run-for-all
       '(
 	Buffer-menu-delete
+	completion-at-point
 	delete-horizontal-space
 	delete-indentation
+	ess-indent-or-complete
+	ess-smart-S-assign
+	ess-smart-comma
+	ess-yank
 	eval-and-replace
 	eval-last-sexp
+	forward-sexp
 	insert-parentheses
 	kill-region
+	mark-word
 	repeat
+	wdired-finish-edit
+	yas-expand
 	))
 
 (setq mc/cmds-to-run-once

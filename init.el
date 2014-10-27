@@ -8,10 +8,8 @@
 (set-face-background 'mode-line-inactive nil)
 
 ;; turn on useful features
-(ido-mode 1)      
-
-;; ediff
-(setq ediff-split-window-function 'split-window-horizontally)
+(ido-mode 1)
+(electric-pair-mode 1)
 
 ;; enable disabled functions
 (put 'erase-buffer 'disabled nil)
@@ -38,11 +36,21 @@
 (setq ess-history-file nil)
 (setq ess-tab-complete-in-script t)
 
+;; expand-region
+(global-set-key (kbd "C-@") 'er/expand-region)
+
 ;; idomenu
 (global-set-key (kbd "C-c i") 'idomenu)
 
-;; js3-mode
-(add-to-list 'auto-mode-alist '("\\.js\\'" . js3-mode))
+;; js2-mode
+(add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
+
+;; js-comint
+(setq inferior-js-program-command "/usr/local/bin/node")
+(setenv "NODE_NO_READLINE" "1")
+(define-key js2-mode-map (kbd "C-c C-j") 'js-send-last-sexp-and-go)
+(define-key js2-mode-map (kbd "C-c C-r") 'js-send-region-and-go)
+(define-key js2-mode-map (kbd "C-c C-b") 'js-send-buffer-and-go)
 
 ;; multiple-cursors
 (global-set-key (kbd "C-c l") 'mc/edit-lines)
@@ -54,25 +62,21 @@
 ;; web-beautify
 (eval-after-load 'js2-mode
   '(define-key js2-mode-map (kbd "C-c b") 'web-beautify-js))
-(eval-after-load 'json-mode
-  '(define-key json-mode-map (kbd "C-c b") 'web-beautify-js))
 (eval-after-load 'sgml-mode
   '(define-key html-mode-map (kbd "C-c b") 'web-beautify-html))
 (eval-after-load 'css-mode
   '(define-key css-mode-map (kbd "C-c b") 'web-beautify-css))
 
 ;; yasnippet
-(add-hook 'js3-mode-hook 'yas-minor-mode)
+(add-hook 'js2-mode-hook 'yas-minor-mode)
 (add-hook 'yas-minor-mode-hook 'yas-reload-all)
 
 ;; zencoding-mode
 (add-hook 'sgml-mode-hook 'zencoding-mode)
-(add-hook 'web-mode-hook 'zencoding-mode)
 
 ;;
 ;; other elisp files to load
 (add-to-list 'load-path "~/.emacs.d/elisp")
 (autoload 'css-syntax-color-hex "css-syntax-color-hex" nil t)
-(autoload 'eval-and-replace "eval-and-replace" nil t)
-(add-hook 'lisp-interaction-mode 'eval-and-replace)
-(define-key lisp-interaction-mode-map (kbd "C-x C-e") 'eval-and-replace)
+; (autoload 'eval-and-replace "eval-and-replace" nil t)
+; (define-key lisp-interaction-mode-map (kbd "C-x C-e") 'eval-and-replace)

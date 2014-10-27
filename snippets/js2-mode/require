@@ -3,4 +3,4 @@
 # key: rq
 # binding: direct-keybinding
 # --
-var ${2:${1:$(file-name-nondirectory yas/text)}} = require('${1:fs}');
+var ${2:${1:$(file-name-nondirectory yas/text)}} = require('${1:fs}')$0
