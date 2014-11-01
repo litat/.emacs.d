@@ -1,0 +1,5 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: css
+# key: css
+# --
+<link rel="stylesheet" type="text/css" href="$0.css">

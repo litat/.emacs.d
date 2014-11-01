@@ -10,6 +10,12 @@
 ;; turn on useful features
 (ido-mode 1)
 (electric-pair-mode 1)
+(toggle-debug-on-error)
+(add-hook 'js2-mode-hook 'subword-mode)
+(advice-add 'browse-url-of-buffer :before 
+	    (lambda ()
+	      (interactive)
+	      (save-buffer)))
 
 ;; enable disabled functions
 (put 'erase-buffer 'disabled nil)
@@ -39,8 +45,17 @@
 ;; expand-region
 (global-set-key (kbd "M-@") 'er/expand-region)
 
+;; flycheck-mode
+(add-hook 'js2-mode-hook 'flycheck-mode)
+
 ;; idomenu
 (global-set-key (kbd "C-c i") 'idomenu)
+
+;; impatient-mode
+(add-hook 'impatient-mode-hook (lambda ()
+				 (when (imp-buffer-enabled-p (current-buffer))
+				   (httpd-start)
+				   (browse-url (concat "http://localhost:8080/imp/live/" (buffer-name))))))
 
 ;; js2-mode
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
@@ -62,6 +77,9 @@
 (global-set-key (kbd "M-p") 'mc/mark-previous-like-this)
 (global-set-key (kbd "C-c a") 'mc/mark-all-like-this)
 
+;; tern
+(add-hook 'js2-mode-hook 'tern-mode)
+
 ;; web-beautify
 (eval-after-load 'js2-mode
   '(define-key js2-mode-map (kbd "C-c b") 'web-beautify-js))
@@ -72,6 +90,7 @@
 
 ;; yasnippet
 (add-hook 'js2-mode-hook 'yas-minor-mode)
+(add-hook 'html-mode-hook 'yas-minor-mode)
 (eval-after-load 'yasnippet '(yas-reload-all))
 
 ;; zencoding-mode
@@ -80,6 +99,13 @@
 ;;
 ;; other elisp files to load
 (add-to-list 'load-path "~/.emacs.d/elisp")
+
 (autoload 'css-syntax-color-hex "css-syntax-color-hex" nil t)
+(add-hook 'css-mode-hook 'css-syntax-color-hex)
+(add-hook 'html-mode-hook 'css-syntax-color-hex)
+
 (autoload 'eval-and-replace "eval-and-replace" nil t)
 (global-set-key (kbd "C-c C-e") 'eval-and-replace)
+
+(autoload 'byte-compile-current-buffer "byte-compile-current-buffer" nil t)
+(add-hook 'after-save-hook 'byte-compile-current-buffer)

@@ -1,0 +1,12 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: html init
+# key: html
+# --
+<!DOCTYPE html>
+<html>
+  <head>
+	$0
+  </head>
+  <body>
+  </body>
+</html>
