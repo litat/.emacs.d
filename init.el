@@ -10,7 +10,6 @@
 ;; turn on useful features
 (ido-mode 1)
 (electric-pair-mode 1)
-(toggle-debug-on-error)
 (add-hook 'js2-mode-hook 'subword-mode)
 (advice-add 'browse-url-of-buffer :before 
 	    (lambda ()
@@ -45,17 +44,15 @@
 ;; expand-region
 (global-set-key (kbd "M-@") 'er/expand-region)
 
-;; flycheck-mode
-(add-hook 'js2-mode-hook 'flycheck-mode)
-
 ;; idomenu
 (global-set-key (kbd "C-c i") 'idomenu)
 
 ;; impatient-mode
-(add-hook 'impatient-mode-hook (lambda ()
-				 (when (imp-buffer-enabled-p (current-buffer))
-				   (httpd-start)
-				   (browse-url (concat "http://localhost:8080/imp/live/" (buffer-name))))))
+(add-hook 'impatient-mode-hook 
+	  (lambda ()
+	    (when (imp-buffer-enabled-p (current-buffer))
+	      (httpd-start)
+	      (browse-url (concat "http://localhost:8080/imp/live/" (buffer-name))))))
 
 ;; js2-mode
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
@@ -83,14 +80,17 @@
 ;; web-beautify
 (eval-after-load 'js2-mode
   '(define-key js2-mode-map (kbd "C-c b") 'web-beautify-js))
-(eval-after-load 'sgml-mode
-  '(define-key html-mode-map (kbd "C-c b") 'web-beautify-html))
+(eval-after-load 'web-mode
+  '(define-key web-mode-map (kbd "C-c b") 'web-beautify-html))
 (eval-after-load 'css-mode
   '(define-key css-mode-map (kbd "C-c b") 'web-beautify-css))
 
+;; web-mode
+(add-to-list 'auto-mode-alist '("\\.html\\'" . web-mode))
+
 ;; yasnippet
 (add-hook 'js2-mode-hook 'yas-minor-mode)
-(add-hook 'html-mode-hook 'yas-minor-mode)
+(add-hook 'web-mode-hook 'yas-minor-mode)
 (eval-after-load 'yasnippet '(yas-reload-all))
 
 ;; zencoding-mode
@@ -102,7 +102,6 @@
 
 (autoload 'css-syntax-color-hex "css-syntax-color-hex" nil t)
 (add-hook 'css-mode-hook 'css-syntax-color-hex)
-(add-hook 'html-mode-hook 'css-syntax-color-hex)
 
 (autoload 'eval-and-replace "eval-and-replace" nil t)
 (global-set-key (kbd "C-c C-e") 'eval-and-replace)
