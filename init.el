@@ -10,6 +10,7 @@
 ;; turn on useful features
 (ido-mode 1)
 (electric-pair-mode 1)
+(show-paren-mode 1)
 (add-hook 'js2-mode-hook 'subword-mode)
 (advice-add 'browse-url-of-buffer :before 
 	    (lambda ()
@@ -23,6 +24,8 @@
 ;; packages
 ;;
 
+(package-initialize)
+
 (require 'package)
 (add-to-list 'package-archives
 	     '("melpa" . "http://melpa.milkbox.net/packages/") t)
@@ -30,8 +33,17 @@
 ;;
 ;; installed packages:
 
+;; ac-capf
+(add-hook 'inferior-js-mode-hook 'ac-capf-setup)
+
+;; ac-js2
+(add-hook 'js2-mode 'ac-js2-mode)
+
 ;; ace-jump-mode
 (global-set-key (kbd "C-c SPC") 'ace-jump-mode)
+
+;; auto-complete-mode
+(global-auto-complete-mode 1)
 
 ;; ess
 (autoload 'r-mode "ess-site" nil t)
@@ -77,6 +89,9 @@
 ;; tern
 (add-hook 'js2-mode-hook 'tern-mode)
 
+;; visual-regexp
+(global-set-key (kbd "C-c C-r") 'vr/replace)
+
 ;; web-beautify
 (eval-after-load 'js2-mode
   '(define-key js2-mode-map (kbd "C-c b") 'web-beautify-js))
@@ -94,7 +109,7 @@
 (eval-after-load 'yasnippet '(yas-reload-all))
 
 ;; zencoding-mode
-(add-hook 'sgml-mode-hook 'zencoding-mode)
+(add-hook 'web-mode-hook 'zencoding-mode)
 
 ;;
 ;; other elisp files to load

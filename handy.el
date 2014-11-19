@@ -17,6 +17,7 @@
 ; (subword-mode)
 ; (toggle-debug-on-error)
 ; (whitespace-mode)
+; (windmove-default-keybindings)
 ; (zap-to-char)
 
 ;; Features that needs parameters.
