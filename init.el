@@ -52,10 +52,12 @@
 
 ;; auto-complete-mode
 (global-auto-complete-mode 1)
-(add-hook 'inferior-js-mode-hook 'ac-capf-setup) ;; ac-capf
-(add-hook 'js2-mode-hook 'ac-capf-setup)
-(add-hook 'lisp-interaction-mode-hook 'ac-capf-setup)
-(add-hook 'emacs-lisp-mode-hook 'ac-capf-setup)
+(setq ac-auto-show-menu 0)
+(define-key ac-complete-mode-map (kbd "C-s") 'ac-isearch)
+;(add-hook 'inferior-js-mode-hook 'ac-capf-setup) ;; ac-capf
+;(add-hook 'js2-mode-hook 'ac-capf-setup)
+;(add-hook 'lisp-interaction-mode-hook 'ac-capf-setup)
+;(add-hook 'emacs-lisp-mode-hook 'ac-capf-setup)
 
 ;; ess
 (add-hook 'R-mode-hook 'subword-mode)
@@ -108,10 +110,3 @@
 (defvar css-mode-map)
 (eval-after-load 'css-mode
   '(define-key css-mode-map (kbd "C-c b") 'web-beautify-css))
-
-;; yasnippet
-(declare-function yas-reload-all "yasnippet")
-(add-hook 'js2-mode-hook '(lambda ()
-			    (yas-minor-mode 1)))
-(add-hook 'web-mode-hook '(lambda ()
-			    (yas-minor-mode 1)))
