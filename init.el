@@ -99,6 +99,9 @@
 (global-set-key (kbd "M-n") 'mc/mark-next-like-this)
 (global-set-key (kbd "M-p") 'mc/mark-previous-like-this)
 
+;; undo-tree
+(undo-tree-mode 1)
+
 ;; visual-regexp
 (global-set-key (kbd "C-c r") 'vr/replace)
 (global-set-key (kbd "C-c m r") 'vr/mc-mark)
