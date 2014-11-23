@@ -18,6 +18,7 @@
 
 ;; enable disabled functions
 (put 'erase-buffer 'disabled nil)
+(put 'narrow-to-region 'disabled nil)
 
 ;;
 ;; elisp files to load
@@ -25,14 +26,18 @@
 
 (add-to-list 'load-path "~/.emacs.d/elisp")
 
+;; css-syntax-color-hex
 (autoload 'css-syntax-color-hex "css-syntax-color-hex" nil t)
 (add-hook 'css-mode-hook 'css-syntax-color-hex)
+(add-hook 'sgml-mode-hook 'css-syntax-color-hex)
 (add-hook 'web-mode-hook 'css-syntax-color-hex)
 
+;; eval-and-replace
 (autoload 'eval-and-replace "eval-and-replace" nil t)
 (define-key emacs-lisp-mode-map (kbd "C-c C-e") 'eval-and-replace)
 (define-key lisp-interaction-mode-map (kbd "C-c C-e") 'eval-and-replace)
 
+;; byte-compile-current-buffer
 (autoload 'byte-compile-current-buffer "byte-compile-current-buffer" nil t)
 (add-hook 'after-save-hook 'byte-compile-current-buffer)
 
@@ -52,20 +57,22 @@
 
 ;; auto-complete-mode
 (global-auto-complete-mode 1)
-(setq ac-auto-show-menu 0)
+(setq ac-auto-show-menu 0
+      ac-use-quick-help nil)
 (define-key ac-complete-mode-map (kbd "C-s") 'ac-isearch)
-;(add-hook 'inferior-js-mode-hook 'ac-capf-setup) ;; ac-capf
-;(add-hook 'js2-mode-hook 'ac-capf-setup)
-;(add-hook 'lisp-interaction-mode-hook 'ac-capf-setup)
-;(add-hook 'emacs-lisp-mode-hook 'ac-capf-setup)
+;; ac-capf
+(add-hook 'js2-mode-hook 'ac-capf-setup)
+(add-hook 'inferior-js-mode-hook 'ac-capf-setup)
+(add-hook 'emacs-lisp-mode-hook 'ac-capf-setup)
+(add-hook 'lisp-interaction-mode-hook 'ac-capf-setup)
 
 ;; ess
 (add-hook 'R-mode-hook 'subword-mode)
 (add-to-list 'auto-mode-alist '("\\.[rR]\\'" . r-mode))
-(setq ess-eval-visibly nil)
-(setq ess-ask-for-ess-directory nil)
-(setq ess-history-file nil)
-(setq ess-tab-complete-in-script t)
+(setq ess-eval-visibly nil
+      ess-ask-for-ess-directory nil
+      ess-history-file nil
+      ess-tab-complete-in-script t)
 
 ;; expand-region
 (global-set-key (kbd "M-@") 'er/expand-region)
@@ -73,12 +80,11 @@
 ;; js2-mode
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
 (add-hook 'js2-mode-hook 'subword-mode)
-(add-hook 'js2-mode-hook 'tern-mode) ;; tern
+(add-hook 'js2-mode-hook 'tern-mode)
 
 ;; js-comint
 (setq inferior-js-program-command "/usr/local/bin/node")
 (setenv "NODE_NO_READLINE" "1")
-(defvar js2-mode-map)
 (eval-after-load 'js2-mode
   '(progn (define-key js2-mode-map (kbd "C-c j j") 'js-send-last-sexp-and-go)
 	  (define-key js2-mode-map (kbd "C-c j r") 'js-send-region-and-go)
@@ -102,11 +108,11 @@
 (add-hook 'web-mode-hook 'zencoding-mode) ;; zencoding-mode
 
 ;; web-beautify
+(defvar web-mode-map)
+(defvar css-mode-map)
 (eval-after-load 'js2-mode
   '(define-key js2-mode-map (kbd "C-c b") 'web-beautify-js))
-(defvar web-mode-map)
 (eval-after-load 'web-mode
   '(define-key web-mode-map (kbd "C-c b") 'web-beautify-html))
-(defvar css-mode-map)
 (eval-after-load 'css-mode
   '(define-key css-mode-map (kbd "C-c b") 'web-beautify-css))
