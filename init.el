@@ -58,11 +58,12 @@
 
 ;; auto-complete-mode
 (global-auto-complete-mode 1)
-(advice-add 'auto-complete-mode-maybe :after 'ac-capf-setup)
+(autoload 'ac-capf-setup-maybe "ac-capf-setup-maybe" nil t)
 (eval-after-load 'auto-complete
   '(progn (setq ac-auto-show-menu 0
 		ac-quick-help-delay 0)
-	  (define-key ac-complete-mode-map (kbd "C-s") 'ac-isearch)))
+	  (define-key ac-complete-mode-map (kbd "C-s") 'ac-isearch)
+	  (advice-add 'auto-complete-mode-maybe :after 'ac-capf-setup-maybe)))
 
 ;; ess
 (add-hook 'R-mode-hook 'subword-mode)
@@ -84,7 +85,8 @@
 (setq inferior-js-program-command "/usr/local/bin/node")
 (setenv "NODE_NO_READLINE" "1")
 (eval-after-load 'js2-mode
-  '(progn (define-key js2-mode-map (kbd "C-c j j") 'js-send-last-sexp-and-go)
+  '(progn (defvar js2-mode-map)
+	  (define-key js2-mode-map (kbd "C-c j j") 'js-send-last-sexp-and-go)
 	  (define-key js2-mode-map (kbd "C-c j r") 'js-send-region-and-go)
 	  (define-key js2-mode-map (kbd "C-c j b") 'js-send-buffer-and-go)))
 
@@ -101,6 +103,7 @@
 (global-undo-tree-mode 1)
 
 ;; visual-regexp
+(setq vr/default-replace-preview t)
 (global-set-key (kbd "C-c r") 'vr/replace)
 (global-set-key (kbd "C-c m r") 'vr/mc-mark)
 
@@ -109,11 +112,12 @@
 (add-hook 'web-mode-hook 'zencoding-mode) ;; zencoding-mode
 
 ;; web-beautify
-(defvar web-mode-map)
-(defvar css-mode-map)
 (eval-after-load 'js2-mode
-  '(define-key js2-mode-map (kbd "C-c b") 'web-beautify-js))
+  '(progn (defvar js2-mode-map)
+	  (define-key js2-mode-map (kbd "C-c b") 'web-beautify-js)))
 (eval-after-load 'web-mode
-  '(define-key web-mode-map (kbd "C-c b") 'web-beautify-html))
+  '(progn (defvar web-mode-map)
+	  (define-key web-mode-map (kbd "C-c b") 'web-beautify-html)))
 (eval-after-load 'css-mode
-  '(define-key css-mode-map (kbd "C-c b") 'web-beautify-css))
+  '(progn (defvar css-mode-map)
+	  (define-key css-mode-map (kbd "C-c b") 'web-beautify-css)))
