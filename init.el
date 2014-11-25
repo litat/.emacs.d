@@ -52,7 +52,6 @@
 (add-to-list 'package-archives
 	     '("melpa" . "http://melpa.milkbox.net/packages/") t)
 
-
 ;; ace-jump-mode
 (global-set-key (kbd "C-c SPC") 'ace-jump-mode)
 
@@ -66,8 +65,9 @@
 	  (advice-add 'auto-complete-mode-maybe :after 'ac-capf-setup-maybe)))
 
 ;; ess
+(autoload 'R-mode "ess-site" nil t)
+(add-to-list 'auto-mode-alist '("\\.[rR]\\'" . R-mode))
 (add-hook 'R-mode-hook 'subword-mode)
-(add-to-list 'auto-mode-alist '("\\.[rR]\\'" . r-mode))
 (setq ess-eval-visibly nil
       ess-ask-for-ess-directory nil
       ess-history-file nil
