@@ -34,8 +34,9 @@
 
 ;; eval-and-replace
 (autoload 'eval-and-replace "eval-and-replace" nil t)
-(define-key emacs-lisp-mode-map (kbd "C-c C-e") 'eval-and-replace)
-(define-key lisp-interaction-mode-map (kbd "C-c C-e") 'eval-and-replace)
+(eval-after-load 'lisp-mode
+  '(progn (define-key emacs-lisp-mode-map (kbd "C-c C-e") 'eval-and-replace)
+	  (define-key lisp-interaction-mode-map (kbd "C-c C-e") 'eval-and-replace)))
 
 ;; byte-compile-current-buffer
 (autoload 'byte-compile-current-buffer "byte-compile-current-buffer" nil t)
@@ -57,14 +58,11 @@
 
 ;; auto-complete-mode
 (global-auto-complete-mode 1)
-(setq ac-auto-show-menu 0
-      ac-use-quick-help nil)
-(define-key ac-complete-mode-map (kbd "C-s") 'ac-isearch)
-;; ac-capf
-(add-hook 'js2-mode-hook 'ac-capf-setup)
-(add-hook 'inferior-js-mode-hook 'ac-capf-setup)
-(add-hook 'emacs-lisp-mode-hook 'ac-capf-setup)
-(add-hook 'lisp-interaction-mode-hook 'ac-capf-setup)
+(advice-add 'auto-complete-mode-maybe :after 'ac-capf-setup)
+(eval-after-load 'auto-complete
+  '(progn (setq ac-auto-show-menu 0
+		ac-quick-help-delay 0)
+	  (define-key ac-complete-mode-map (kbd "C-s") 'ac-isearch)))
 
 ;; ess
 (add-hook 'R-mode-hook 'subword-mode)
@@ -100,7 +98,7 @@
 (global-set-key (kbd "M-p") 'mc/mark-previous-like-this)
 
 ;; undo-tree
-(undo-tree-mode 1)
+(global-undo-tree-mode 1)
 
 ;; visual-regexp
 (global-set-key (kbd "C-c r") 'vr/replace)
