@@ -55,14 +55,15 @@
 ;; ace-jump-mode
 (global-set-key (kbd "C-c SPC") 'ace-jump-mode)
 
-;; auto-complete-mode
-(global-auto-complete-mode 1)
-(autoload 'ac-capf-setup-maybe "ac-capf-setup-maybe" nil t)
-(eval-after-load 'auto-complete
-  '(progn (setq ac-auto-show-menu 0
-		ac-quick-help-delay 0)
-	  (define-key ac-complete-mode-map (kbd "C-s") 'ac-isearch)
-	  (advice-add 'auto-complete-mode-maybe :after 'ac-capf-setup-maybe)))
+;; company
+(global-company-mode 1)
+(eval-after-load 'company
+  '(progn (setq company-idle-delay 0
+		company-echo-delay 0
+		company-minimum-prefix-length 1)
+	  (define-key company-active-map (kbd "C-s") 'company-filter-candidates)))
+;; company-ess
+(eval-after-load 'ess-site '(require 'company-ess))
 
 ;; ess
 (autoload 'R-mode "ess-site" nil t)
@@ -85,8 +86,7 @@
 (setq inferior-js-program-command "/usr/local/bin/node")
 (setenv "NODE_NO_READLINE" "1")
 (eval-after-load 'js2-mode
-  '(progn (defvar js2-mode-map)
-	  (define-key js2-mode-map (kbd "C-c j j") 'js-send-last-sexp-and-go)
+  '(progn (define-key js2-mode-map (kbd "C-c j j") 'js-send-last-sexp-and-go)
 	  (define-key js2-mode-map (kbd "C-c j r") 'js-send-region-and-go)
 	  (define-key js2-mode-map (kbd "C-c j b") 'js-send-buffer-and-go)))
 
@@ -113,11 +113,8 @@
 
 ;; web-beautify
 (eval-after-load 'js2-mode
-  '(progn (defvar js2-mode-map)
-	  (define-key js2-mode-map (kbd "C-c b") 'web-beautify-js)))
+  '(define-key js2-mode-map (kbd "C-c b") 'web-beautify-js))
 (eval-after-load 'web-mode
-  '(progn (defvar web-mode-map)
-	  (define-key web-mode-map (kbd "C-c b") 'web-beautify-html)))
+  '(define-key web-mode-map (kbd "C-c b") 'web-beautify-html))
 (eval-after-load 'css-mode
-  '(progn (defvar css-mode-map)
-	  (define-key css-mode-map (kbd "C-c b") 'web-beautify-css)))
+  '(define-key css-mode-map (kbd "C-c b") 'web-beautify-css))
