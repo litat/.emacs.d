@@ -28,15 +28,16 @@
 
 ;; css-syntax-color-hex
 (autoload 'css-syntax-color-hex "css-syntax-color-hex" nil t)
-(add-hook 'css-mode-hook 'css-syntax-color-hex)
-(add-hook 'sgml-mode-hook 'css-syntax-color-hex)
-(add-hook 'web-mode-hook 'css-syntax-color-hex)
+(mapcar (lambda (hook) (add-hook hook 'css-syntax-color-hex))
+	(list 'css-mode-hook
+	      'web-mode-hook))
 
 ;; eval-and-replace
 (autoload 'eval-and-replace "eval-and-replace" nil t)
 (eval-after-load 'lisp-mode
-  '(progn (define-key emacs-lisp-mode-map (kbd "C-c C-e") 'eval-and-replace)
-	  (define-key lisp-interaction-mode-map (kbd "C-c C-e") 'eval-and-replace)))
+  '(mapcar (lambda (map) (define-key map (kbd "C-c C-e") 'eval-and-replace))
+	   (list emacs-lisp-mode-map
+		 lisp-interaction-mode-map)))
 
 ;; byte-compile-current-buffer
 (autoload 'byte-compile-current-buffer "byte-compile-current-buffer" nil t)
@@ -86,9 +87,10 @@
 (setq inferior-js-program-command "/usr/local/bin/node")
 (setenv "NODE_NO_READLINE" "1")
 (eval-after-load 'js2-mode
-  '(progn (define-key js2-mode-map (kbd "C-c j j") 'js-send-last-sexp-and-go)
-	  (define-key js2-mode-map (kbd "C-c j r") 'js-send-region-and-go)
-	  (define-key js2-mode-map (kbd "C-c j b") 'js-send-buffer-and-go)))
+  '(let* ((map js2-mode-map))
+     (define-key map (kbd "C-c j j") 'js-send-last-sexp-and-go)
+     (define-key map (kbd "C-c j r") 'js-send-region-and-go)
+     (define-key map (kbd "C-c j b") 'js-send-buffer-and-go)))
 
 ;; litable
 (add-hook 'lisp-interaction-mode-hook 'litable-mode)
