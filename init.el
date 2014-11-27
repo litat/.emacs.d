@@ -28,16 +28,14 @@
 
 ;; css-syntax-color-hex
 (autoload 'css-syntax-color-hex "css-syntax-color-hex" nil t)
-(mapcar (lambda (hook) (add-hook hook 'css-syntax-color-hex))
-	(list 'css-mode-hook
-	      'web-mode-hook))
+(add-hook 'css-mode-hook 'css-syntax-color-hex)
+(add-hook 'web-mode-hook 'css-syntax-color-hex)
 
 ;; eval-and-replace
 (autoload 'eval-and-replace "eval-and-replace" nil t)
 (eval-after-load 'lisp-mode
-  '(mapcar (lambda (map) (define-key map (kbd "C-c C-e") 'eval-and-replace))
-	   (list emacs-lisp-mode-map
-		 lisp-interaction-mode-map)))
+  '(progn (define-key emacs-lisp-mode-map (kbd "C-c C-e") 'eval-and-replace)
+	  (define-key lisp-interaction-mode-map (kbd "C-c C-e") 'eval-and-replace)))
 
 ;; byte-compile-current-buffer
 (autoload 'byte-compile-current-buffer "byte-compile-current-buffer" nil t)
@@ -69,11 +67,12 @@
 ;; ess
 (autoload 'R-mode "ess-site" nil t)
 (add-to-list 'auto-mode-alist '("\\.[rR]\\'" . R-mode))
-(add-hook 'R-mode-hook 'subword-mode)
-(setq ess-eval-visibly nil
-      ess-ask-for-ess-directory nil
-      ess-history-file nil
-      ess-tab-complete-in-script t)
+(eval-after-load 'ess-site
+  '(progn (setq ess-eval-visibly nil
+		ess-ask-for-ess-directory nil
+		ess-history-file nil
+		ess-tab-complete-in-script t)
+	  (add-hook 'R-mode-hook 'subword-mode)))
 
 ;; expand-region
 (global-set-key (kbd "M-@") 'er/expand-region)
@@ -82,18 +81,6 @@
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
 (add-hook 'js2-mode-hook 'subword-mode)
 (add-hook 'js2-mode-hook 'tern-mode)
-
-;; js-comint
-(setq inferior-js-program-command "/usr/local/bin/node")
-(setenv "NODE_NO_READLINE" "1")
-(eval-after-load 'js2-mode
-  '(let* ((map js2-mode-map))
-     (define-key map (kbd "C-c j j") 'js-send-last-sexp-and-go)
-     (define-key map (kbd "C-c j r") 'js-send-region-and-go)
-     (define-key map (kbd "C-c j b") 'js-send-buffer-and-go)))
-
-;; litable
-(add-hook 'lisp-interaction-mode-hook 'litable-mode)
 
 ;; multiple-cursors
 (global-set-key (kbd "C-c m l") 'mc/edit-lines)
