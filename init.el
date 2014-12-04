@@ -3,9 +3,24 @@
 ;;
 
 ;; display
-(modify-all-frames-parameters '((menu-bar-lines . 0)))
-(set-face-background 'mode-line nil)
-(set-face-background 'mode-line-inactive nil)
+(if (display-graphic-p)
+    ;; Emacs.app
+    (progn (modify-all-frames-parameters
+	    '((vertical-scroll-bars . nil)
+	      (horizontal-scroll-bars . nil)
+	      (border-width . 0)
+	      (internal-border-width . 0)
+	      (left-fringe . 0)
+	      (right-fringe . 0)
+	      (menu-bar-lines . 0)
+	      (tool-bar-lines . 0)))
+	   (set-face-attribute 'mode-line nil :box nil)
+	   (set-face-attribute 'mode-line-inactive nil :box nil)
+	   (setq visible-bell t)
+	   (setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin")))
+  ;; terminal
+  (progn (set-face-background 'mode-line nil)
+	 (set-face-background 'mode-line-inactive nil)))
 
 ;; turn on useful features
 (ido-mode 1)
@@ -52,7 +67,7 @@
 	     '("melpa" . "http://melpa.milkbox.net/packages/") t)
 
 ;; ace-jump-mode
-(global-set-key (kbd "C-c SPC") 'ace-jump-mode)
+(global-set-key (kbd "C-z") 'ace-jump-mode)
 
 ;; company
 (global-company-mode 1)

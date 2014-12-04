@@ -7,6 +7,7 @@
 ; (electric-pair-mode)
 ; (font-lock-mode)
 ; (glasses-mode)
+; (hl-line-mode)
 ; (highlight-regexp)
 ; (icomplete-mode)
 ; (ido-mode)
