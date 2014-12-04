@@ -17,7 +17,9 @@
 	   (set-face-attribute 'mode-line nil :box nil)
 	   (set-face-attribute 'mode-line-inactive nil :box nil)
 	   (setq visible-bell t)
-	   (setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin")))
+	   (setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
+	   ;; some useful features
+	   (windmove-default-keybindings))
   ;; terminal
   (progn (set-face-background 'mode-line nil)
 	 (set-face-background 'mode-line-inactive nil)))
