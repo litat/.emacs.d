@@ -16,7 +16,9 @@
 	      (tool-bar-lines . 0)))
 	   (set-face-attribute 'mode-line nil :box nil)
 	   (set-face-attribute 'mode-line-inactive nil :box nil)
-	   (setq visible-bell t)
+	   (setq visible-bell t
+		 use-dialog-box nil)
+	   (tooltip-mode -1)
 	   (setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
 	   ;; some useful features
 	   (windmove-default-keybindings))

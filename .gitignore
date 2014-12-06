@@ -10,3 +10,4 @@ bookmarks
 
 # Package generated
 .*.el
+tramp

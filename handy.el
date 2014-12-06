@@ -17,6 +17,7 @@
 ; (show-paren-mode)
 ; (subword-mode)
 ; (toggle-debug-on-error)
+; (tramp-unload-tram)
 ; (whitespace-mode)
 ; (windmove-default-keybindings)
 ; (zap-to-char)
