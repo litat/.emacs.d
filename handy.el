@@ -12,6 +12,7 @@
 ; (icomplete-mode)
 ; (ido-mode)
 ; (just-one-space)
+; (multi-occur)
 ; (narrow-to-defun)
 ; (occur)
 ; (show-paren-mode)
