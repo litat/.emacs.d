@@ -5,4 +5,4 @@
    nil
    '(("[-+]?\\b[0-9]*\\.?[0-9]+\\(?:[eE][-+]?[0-9]+\\)?\\b"
       . 'font-lock-constant-face)))
-  (font-lock-fontify-buffer))
+  (font-lock-ensure))

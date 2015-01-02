@@ -61,10 +61,14 @@
 (autoload 'byte-compile-current-buffer "byte-compile-current-buffer" nil t)
 (add-hook 'after-save-hook 'byte-compile-current-buffer)
 
-;; highlight numbers
+;; hl-numbers
+(autoload 'hl-numbers "hl-numbers" nil t)
 (add-hook 'lisp-mode-hook 'hl-numbers)
 (add-hook 'lisp-interaction-mode-hook 'hl-numbers)
 (add-hook 'js2-mode-hook 'hl-numbers)
+
+;; pin-window
+(autoload 'pin-window "pin-window" nil t)
 
 ;;
 ;; packages
@@ -114,7 +118,10 @@
 (global-set-key (kbd "M-p") 'mc/mark-previous-like-this)
 
 ;; undo-tree
-(global-undo-tree-mode 1)
+(defun undo-tree-on-file ()
+  (when buffer-file-name
+  (undo-tree-mode 1)))
+(add-hook 'after-change-major-mode-hook 'undo-tree-on-file)
 
 ;; visual-regexp
 (setq vr/default-replace-preview t)
