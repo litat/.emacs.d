@@ -18,7 +18,7 @@
 	   (setq visible-bell t
 		 use-dialog-box nil)
 	   (tooltip-mode -1)
-	   (setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
+	   (setenv "PATH" (concat "/usr/local/bin:" (getenv "PATH")))
 	   ;; some useful features
 	   (global-unset-key (kbd "C-z"))
 	   (windmove-default-keybindings))
@@ -37,11 +37,6 @@
 	    (lambda ()
 	      (interactive)
 	      (save-buffer)))
-
-;; highlight numbers
-(font-lock-add-keywords
- nil
- '(("[-+]?\\b[0-9]*\\.?[0-9]+\\(?:[eE][-+]?[0-9]+\\)?\\b" . 'font-lock-constant-face)))
 
 ;; enable disabled functions
 (put 'erase-buffer 'disabled nil)
@@ -65,6 +60,11 @@
 ;; byte-compile-current-buffer
 (autoload 'byte-compile-current-buffer "byte-compile-current-buffer" nil t)
 (add-hook 'after-save-hook 'byte-compile-current-buffer)
+
+;; highlight numbers
+(add-hook 'lisp-mode-hook 'hl-numbers)
+(add-hook 'lisp-interaction-mode-hook 'hl-numbers)
+(add-hook 'js2-mode-hook 'hl-numbers)
 
 ;;
 ;; packages
