@@ -38,6 +38,11 @@
 	      (interactive)
 	      (save-buffer)))
 
+;; highlight numbers
+(font-lock-add-keywords
+ nil
+ '(("[-+]?\\b[0-9]*\\.?[0-9]+\\(?:[eE][-+]?[0-9]+\\)?\\b" . 'font-lock-constant-face)))
+
 ;; enable disabled functions
 (put 'erase-buffer 'disabled nil)
 (put 'narrow-to-region 'disabled nil)
@@ -55,9 +60,7 @@
 
 ;; eval-and-replace
 (autoload 'eval-and-replace "eval-and-replace" nil t)
-(eval-after-load 'lisp-mode
-  '(progn (define-key emacs-lisp-mode-map (kbd "C-c C-e") 'eval-and-replace)
-	  (define-key lisp-interaction-mode-map (kbd "C-c C-e") 'eval-and-replace)))
+(global-set-key (kbd "C-c C-e") 'eval-and-replace)
 
 ;; byte-compile-current-buffer
 (autoload 'byte-compile-current-buffer "byte-compile-current-buffer" nil t)

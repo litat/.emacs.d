@@ -1,0 +1,46 @@
+;; 
+;; Some handy features that built-in emacs.
+;; 
+
+;; interactive functions
+(check-parens)
+(delete-trailing-whitespace)
+(electric-pair-mode)
+(icomplete-mode)
+(ido-mode)
+(toggle-debug-on-error)
+(tramp-unload-tram)
+
+;; Find files in directory.
+(find-name-dired)
+(ffap)
+
+;; Major mode for syntax highlighting.
+(font-lock-mode)
+
+;; For clearer codes.
+(glasses-mode)
+(hl-line-mode)
+(highlight-regexp)
+(narrow-to-defun)
+(show-paren-mode)
+(subword-mode)
+(whitespace-mode)
+
+;; Convert code buffer into html file.
+(htmlfontify-buffer)
+
+;; Find occurrences in code.
+(multi-occur)
+(occur)
+
+;; Navigation between windows.
+(windmove-default-keybindings)
+
+;; For editing.
+(just-one-space)
+(zap-to-char)
+(flush-lines)
+
+;; Fix a window in place.
+(set-window-dedicated-p (selected-window) t)
