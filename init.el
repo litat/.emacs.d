@@ -63,7 +63,7 @@
 
 ;; hl-numbers
 (autoload 'hl-numbers "hl-numbers" nil t)
-(add-hook 'lisp-mode-hook 'hl-numbers)
+(add-hook 'emacs-lisp-mode-hook 'hl-numbers)
 (add-hook 'lisp-interaction-mode-hook 'hl-numbers)
 (add-hook 'js2-mode-hook 'hl-numbers)
 
@@ -91,7 +91,7 @@
 		company-minimum-prefix-length 1)
 	  (define-key company-active-map (kbd "C-s") 'company-filter-candidates)))
 ;; company-ess
-(eval-after-load 'ess-site '(require 'company-ess))
+(add-to-list 'company-backends 'company-ess-backend)
 
 ;; ess
 (autoload 'R-mode "ess-site" nil t)
