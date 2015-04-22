@@ -3,36 +3,33 @@
 ;;
 
 ;; display
-(if (display-graphic-p)
-    ;; Emacs.app
-    (progn (modify-all-frames-parameters
-	    '((vertical-scroll-bars . nil)
-	      (horizontal-scroll-bars . nil)
-	      (border-width . 0)
-	      (internal-border-width . 0)
-	      (left-fringe . 0)
-	      (right-fringe . 0)
-	      (tool-bar-lines . 0)))
-	   (set-face-attribute 'mode-line nil :box nil)
-	   (set-face-attribute 'mode-line-inactive nil :box nil)
-	   (setq visible-bell t
-		 use-dialog-box nil)
-	   (tooltip-mode -1)
-	   (setenv "PATH" (concat "/usr/local/bin:" (getenv "PATH")))
-	   ;; some useful features
-	   (global-unset-key (kbd "C-z"))
-	   (windmove-default-keybindings))
-  ;; terminal
-  (progn (set-face-background 'mode-line nil)
-	 (set-face-background 'mode-line-inactive nil)))
 
 (modify-all-frames-parameters
- '((menu-bar-lines . 0)))
+ '((vertical-scroll-bars . nil)
+   (horizontal-scroll-bars . nil)
+   (menu-bar-lines . 0)
+   (border-width . 0)
+   (internal-border-width . 0)
+   (left-fringe . 0)
+   (right-fringe . 0)
+   (tool-bar-lines . 0)))
+(set-face-attribute 'mode-line nil :box nil)
+(set-face-attribute 'mode-line-inactive nil :box nil)
+(setq visible-bell t
+      use-dialog-box nil
+      ns-pop-up-frames nil
+      inhibit-splash-screen t)
+(tooltip-mode -1)
+(menu-bar-mode -1)
+;; some useful features
+(if (display-graphic-p))
+(global-unset-key (kbd "C-z"))
 
 ;; turn on useful features
 (ido-mode 1)
 (electric-pair-mode 1)
 (show-paren-mode 1)
+(windmove-default-keybindings)
 (advice-add 'browse-url-of-buffer :before
 	    (lambda ()
 	      (interactive)
@@ -41,6 +38,10 @@
 ;; enable disabled functions
 (put 'erase-buffer 'disabled nil)
 (put 'narrow-to-region 'disabled nil)
+
+;; ediff setting
+(setq ediff-split-window-function 'split-window-horizontally)
+(setq ediff-window-setup-function 'ediff-setup-windows-plain)
 
 ;;
 ;; elisp files to load
@@ -66,6 +67,7 @@
 (add-hook 'emacs-lisp-mode-hook 'hl-numbers)
 (add-hook 'lisp-interaction-mode-hook 'hl-numbers)
 (add-hook 'js2-mode-hook 'hl-numbers)
+(add-hook 'R-mode-hook 'hl-numbers)
 
 ;; pin-window
 (autoload 'pin-window "pin-window" nil t)
@@ -101,6 +103,7 @@
 		ess-ask-for-ess-directory nil
 		ess-history-file nil
 		ess-tab-complete-in-script t)
+	  (require 'cl)
 	  (add-hook 'R-mode-hook 'subword-mode)))
 
 ;; expand-region
