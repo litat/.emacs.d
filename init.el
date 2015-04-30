@@ -12,7 +12,9 @@
    (internal-border-width . 0)
    (left-fringe . 0)
    (right-fringe . 0)
-   (tool-bar-lines . 0)))
+   (tool-bar-lines . 0)
+   (width . 82)
+   (height . 53)))
 (set-face-attribute 'mode-line nil :box nil)
 (set-face-attribute 'mode-line-inactive nil :box nil)
 (setq visible-bell t
@@ -21,9 +23,11 @@
       inhibit-splash-screen t)
 (tooltip-mode -1)
 (menu-bar-mode -1)
-;; some useful features
-(if (display-graphic-p))
-(global-unset-key (kbd "C-z"))
+
+(if (display-graphic-p)
+    (progn (global-set-key (kbd "C-x C-c") 'ns-do-hide-emacs)
+	   (global-unset-key (kbd "C-z"))
+	   (global-set-key (kbd "C-x C-z") 'save-buffers-kill-terminal)))
 
 ;; turn on useful features
 (ido-mode 1)
@@ -38,6 +42,12 @@
 ;; enable disabled functions
 (put 'erase-buffer 'disabled nil)
 (put 'narrow-to-region 'disabled nil)
+
+; environment variables
+(setenv "PATH"
+	"/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/texbin")
+(setq exec-path (split-string (getenv "PATH") ":"))
+(setenv "LANG" "en_US.UTF-8")
 
 ;; ediff setting
 (setq ediff-split-window-function 'split-window-horizontally)
@@ -104,7 +114,8 @@
 		ess-history-file nil
 		ess-tab-complete-in-script t)
 	  (require 'cl)
-	  (add-hook 'R-mode-hook 'subword-mode)))
+	  (add-hook 'R-mode-hook 'subword-mode)
+	  (define-key inferior-ess-mode-map (kbd "C-c SPC") 'ace-jump-mode)))
 
 ;; expand-region
 (global-set-key (kbd "M-@") 'er/expand-region)
