@@ -143,15 +143,18 @@
 (global-set-key (kbd "C-c m r") 'vr/mc-mark)
 
 ;; web-mode
-(add-to-list 'auto-mode-alist '("\\.html\\'" . web-mode))
-(add-hook 'web-mode-hook 'zencoding-mode) ;; zencoding-mode
+; (add-to-list 'auto-mode-alist '("\\.html\\'" . web-mode))
 
 ;; web-beautify
 (eval-after-load 'js2-mode
   '(define-key js2-mode-map (kbd "C-c b") 'web-beautify-js))
-(eval-after-load 'web-mode
-  '(define-key web-mode-map (kbd "C-c b") 'web-beautify-html))
 (eval-after-load 'html-mode
+  '(define-key html-mode-map (kbd "C-c b") 'web-beautify-html))
+(eval-after-load 'web-mode
   '(define-key web-mode-map (kbd "C-c b") 'web-beautify-html))
 (eval-after-load 'css-mode
   '(define-key css-mode-map (kbd "C-c b") 'web-beautify-css))
+
+;; zencoding-mode
+(add-hook 'html-mode-hook 'zencoding-mode)
+(add-hook 'web-mode-hook 'zencoding-mode) 
