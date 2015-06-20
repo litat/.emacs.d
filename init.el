@@ -151,5 +151,7 @@
   '(define-key js2-mode-map (kbd "C-c b") 'web-beautify-js))
 (eval-after-load 'web-mode
   '(define-key web-mode-map (kbd "C-c b") 'web-beautify-html))
+(eval-after-load 'html-mode
+  '(define-key web-mode-map (kbd "C-c b") 'web-beautify-html))
 (eval-after-load 'css-mode
   '(define-key css-mode-map (kbd "C-c b") 'web-beautify-css))
