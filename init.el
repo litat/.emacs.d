@@ -79,6 +79,10 @@
 (add-hook 'js2-mode-hook 'hl-numbers)
 (add-hook 'R-mode-hook 'hl-numbers)
 
+;; hl-tags-mode
+(autoload 'hl-tags-mode "hl-tags-mode" nil t)
+(add-hook 'sgml-mode-hook 'hl-tags-mode)
+
 ;; pin-window
 (autoload 'pin-window "pin-window" nil t)
 
@@ -148,8 +152,8 @@
 ;; web-beautify
 (eval-after-load 'js2-mode
   '(define-key js2-mode-map (kbd "C-c b") 'web-beautify-js))
-(eval-after-load 'html-mode
-  '(define-key html-mode-map (kbd "C-c b") 'web-beautify-html))
+(eval-after-load 'sgml-mode
+  '(define-key sgml-mode-map (kbd "C-c b") 'web-beautify-html))
 (eval-after-load 'web-mode
   '(define-key web-mode-map (kbd "C-c b") 'web-beautify-html))
 (eval-after-load 'css-mode
