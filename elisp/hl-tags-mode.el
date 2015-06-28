@@ -36,7 +36,17 @@
   :group 'convenience)
 
 (defface hl-tags-face
-  '((t :inherit highlight))
+  '((((class color) (min-colors 88) (background light))
+     :background "darkseagreen1")
+    (((class color) (min-colors 88) (background dark))
+     :background "darkolivegreen")
+    (((class color) (min-colors 16) (background light))
+     :background "darkseagreen1")
+    (((class color) (min-colors 16) (background dark))
+     :background "darkolivegreen")
+    (((class color) (min-colors 8))
+     :background "green" :foreground "black")
+    (t :inverse-video t))
   "Face used to highlight matching tags."
   :group 'hl-tags)
 
