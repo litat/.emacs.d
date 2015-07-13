@@ -12,3 +12,6 @@ bookmarks
 .*.el
 tramp
 url
+recentf
+projectile*
+helm*
