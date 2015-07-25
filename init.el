@@ -12,11 +12,8 @@
    (internal-border-width . 0)
    (left-fringe . 0)
    (right-fringe . 0)
-   (tool-bar-lines . 0)
-   (width . 82)
-   (height . 55)))
-(set-face-attribute 'mode-line nil :box nil)
-(set-face-attribute 'mode-line-inactive nil :box nil)
+   (tool-bar-lines . 0)))
+
 (setq visible-bell t
       use-dialog-box nil
       ns-pop-up-frames nil
@@ -29,14 +26,11 @@
     (progn (global-set-key (kbd "C-x C-c") 'ns-do-hide-emacs)
 	   (global-unset-key (kbd "C-z"))
 	   (global-set-key (kbd "C-x C-z") 'save-buffers-kill-terminal)
-	   ;; theme related
-	   (load-theme 'wombat)
-	   (set-face-background 'cursor "white")
-	   (set-face-background 'isearch "LightSkyBlue1")
-	   (set-face-background 'lazy-highlight "Royalblue4")))
+	   (toggle-frame-fullscreen)))
 
 ;; turn on useful features
 (electric-pair-mode 1)
+(setq show-paren-delay 0)
 (show-paren-mode 1)
 (windmove-default-keybindings)
 (advice-add 'browse-url-of-buffer :before
@@ -70,7 +64,6 @@
 ;; css-syntax-color-hex
 (autoload 'css-syntax-color-hex "css-syntax-color-hex" nil t)
 (add-hook 'css-mode-hook 'css-syntax-color-hex)
-(add-hook 'web-mode-hook 'css-syntax-color-hex)
 
 ;; eval-and-replace
 (autoload 'eval-and-replace "eval-and-replace" nil t)
@@ -91,8 +84,12 @@
 (autoload 'hl-tags-mode "hl-tags-mode" nil t)
 (add-hook 'sgml-mode-hook 'hl-tags-mode)
 
-;; my-helm-company-show-doc
-;(autoload 'my-helm-company-show-doc "my-helm-company-show-doc" nil t)
+;; jsbeautify-current-buffer
+(autoload 'jsbeautify-current-buffer "jsbeautify-current-buffer" nil t)
+(add-hook 'before-save-hook 'jsbeautify-current-buffer)
+
+;; nodejs-repl-eval
+(autoload 'nodejs-repl-eval-dwim "nodejs-repl-eval" nil t)
 
 ;; pin-window
 (autoload 'pin-window "pin-window" nil t)
@@ -107,8 +104,9 @@
 (add-to-list 'package-archives
 	     '("melpa" . "http://melpa.milkbox.net/packages/") t)
 
-;; ace-jump-mode
-(global-set-key (kbd "C-c SPC") 'ace-jump-mode)
+;; avy
+(global-set-key (kbd "C-;") 'avy-goto-word-or-subword-1)
+(global-set-key (kbd "C-M-;") 'avy-goto-char)
 
 ;; company
 (global-company-mode 1)
@@ -124,6 +122,9 @@
 ;; company-tern
 (add-to-list 'company-backends 'company-tern)
 
+;; emmet-mode
+(add-hook 'html-mode-hook 'emmet-mode)
+
 ;; ess
 (autoload 'R-mode "ess-site" nil t)
 (add-to-list 'auto-mode-alist '("\\.[rR]\\'" . R-mode))
@@ -133,15 +134,19 @@
 		ess-history-file nil
 		ess-tab-complete-in-script t)
 	  (require 'cl)
-	  (add-hook 'R-mode-hook 'subword-mode)
-	  (define-key inferior-ess-mode-map (kbd "C-c SPC") 'ace-jump-mode)))
+	  (add-hook 'R-mode-hook 'subword-mode)))
 
 ;; expand-region
 (global-set-key (kbd "M-@") 'er/expand-region)
 
+;; flycheck
+(add-hook 'js2-mode-hook 'flycheck-mode)
+(eval-after-load 'flycheck
+  '(setq flycheck-display-errors-delay 0))
+
 ;; helm
 (helm-mode 1)
-(eval-after-load 'helm
+(eval-load 'helm
   '(progn (require 'helm-config)
 	  (require 'helm-imenu)
 	  (require 'helm-company)
@@ -152,18 +157,16 @@
 	  (global-set-key (kbd "M-g s") 'helm-do-grep)
 	  (global-set-key (kbd "C-x b") 'helm-mini)
 	  (global-set-key (kbd "C-x C-b") 'helm-buffers-list)
+	  (global-set-key (kbd "C-x C-f") 'helm-find-files)
 	  (global-set-key (kbd "M-y") 'helm-show-kill-ring)
 	  (global-set-key (kbd "C-h a") 'helm-apropos)
 	  (global-set-key (kbd "C-h i") 'helm-info-elisp)
 	  (define-key isearch-mode-map (kbd "M-s o") 'helm-occur-from-isearch)
-;	  (define-key helm-company-map (kbd "C-h") 'my-helm-company-show-doc)
 	  ;; settings
-	  (helm-autoresize-mode 1)
-	  (setq helm-split-window-in-side-p t
+	  (setq helm-split-window-default-side 'other
 		helm-follow-mode-persistent t
 		helm-quick-update t
 		helm-display-header-line nil
-		helm-autoresize-max-height 50
 		helm-source-occur
 		(helm-make-source "Occur" 'helm-source-multi-occur :follow 1)
 		helm-source-moccur
@@ -171,20 +174,22 @@
 		helm-source-buffers-list
 		(helm-make-source "Buffers" 'helm-source-buffers :follow 1)
 		helm-source-imenu
-		(helm-make-source "Imenu" 'helm-imenu-source :follow 1))
-	  ;; display
-	  (set-face-attribute 'helm-selection-line nil :underline nil)
-	  (set-face-attribute 'helm-match-item nil :inherit 'lazy-highlight)
-	  (set-face-attribute 'helm-source-header nil :height 1.1)
-	  (set-face-background 'helm-selection "Royalblue4")
-	  (set-face-background 'helm-visible-mark "Lightskyblue1")))
+		(helm-make-source "Imenu" 'helm-imenu-source :follow 1))))
 
 ;; js2-mode
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
 (add-hook 'js2-mode-hook 'subword-mode)
 (add-hook 'js2-mode-hook 'tern-mode)
 (eval-after-load 'js2-mode
-  '(define-key js2-mode-map (kbd "C-c C-l") 'js2-display-error-list))
+  '(progn (define-key js2-mode-map (kbd "C-c C-l") 'flycheck-list-errors)
+	  (js2-mode-hide-warnings-and-errors)
+	  (setq js2-basic-offset 2)))
+
+;; monokai theme
+(if (display-graphic-p)
+    (load-theme 'monokai t))
+;; (set-face-attribute 'mode-line nil :box nil)
+;; (set-face-attribute 'mode-line-inactive nil :box nil)
 
 ;; multiple-cursors
 (global-set-key (kbd "C-c m l") 'mc/edit-lines)
@@ -192,12 +197,25 @@
 (global-set-key (kbd "M-n") 'mc/mark-next-like-this)
 (global-set-key (kbd "M-p") 'mc/mark-previous-like-this)
 
+;; nodejs
+(eval-after-load 'js2-mode
+  '(define-key js2-mode-map (kbd "C-x C-e") 'nodejs-repl-eval-dwim))
+
 ;; projectile
 (projectile-global-mode 1)
 (eval-after-load 'projectile
   '(progn (helm-projectile-on)
 	  (setq projectile-completion-system 'helm
-		projectile-enable-caching t)))
+		projectile-enable-caching t
+		projectile-mode-line
+		'(:eval (if (condition-case nil
+				(and projectile-require-project-root
+				     (projectile-project-root)
+				     buffer-file-name)
+			      (error nil))
+			    (format " Projectile[%s]"
+				    (projectile-project-name))
+			  "")))))
 
 ;; undo-tree
 (defun undo-tree-on-file ()
@@ -215,12 +233,6 @@
   '(define-key js2-mode-map (kbd "C-c b") 'web-beautify-js))
 (eval-after-load 'sgml-mode
   '(define-key sgml-mode-map (kbd "C-c b") 'web-beautify-html))
-(eval-after-load 'web-mode
-  '(define-key web-mode-map (kbd "C-c b") 'web-beautify-html))
 (eval-after-load 'css-mode
   '(define-key css-mode-map (kbd "C-c b") 'web-beautify-css))
-
-;; zencoding-mode
-(add-hook 'html-mode-hook 'zencoding-mode)
-(add-hook 'web-mode-hook 'zencoding-mode)
 
